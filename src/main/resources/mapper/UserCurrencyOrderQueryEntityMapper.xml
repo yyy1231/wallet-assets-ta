@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.UserCurrencyOrderQueryEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.UserCurrencyOrderQueryEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="currency_chain_id" jdbcType="BIGINT" property="currencyChainId" />
+    <result column="protocol" jdbcType="VARCHAR" property="protocol" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="from_address" jdbcType="VARCHAR" property="fromAddress" />
+    <result column="to_address" jdbcType="VARCHAR" property="toAddress" />
+    <result column="tx_id" jdbcType="VARCHAR" property="txId" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="new_price" jdbcType="DECIMAL" property="newPrice" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="gas" jdbcType="DECIMAL" property="gas" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="nonce" jdbcType="BIGINT" property="nonce" />
+    <result column="is_exception" jdbcType="INTEGER" property="isException" />
+    <result column="inflow_min" jdbcType="DECIMAL" property="inflowMin" />
+    <result column="confirmation_amount" jdbcType="INTEGER" property="confirmationAmount" />
+    <result column="block_time" jdbcType="TIMESTAMP" property="blockTime" />
+    <result column="reject_reason" jdbcType="VARCHAR" property="rejectReason" />
+    <result column="exception_reason" jdbcType="VARCHAR" property="exceptionReason" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="asset_account_type" jdbcType="INTEGER" property="assetAccountType" />
+    <result column="op_type" jdbcType="TINYINT" property="opType" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="token_id" jdbcType="BIGINT" property="tokenId" />
+    <result column="is_collect" jdbcType="TINYINT" property="isCollect" />
+    <result column="latest_notes" jdbcType="VARCHAR" property="latestNotes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_currency_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.UserCurrencyOrderQueryEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_currency_order (user_id, currency_chain_id, protocol, 
+      currency, from_address, to_address, 
+      tx_id, amount, new_price, 
+      fee, gas, total, type, 
+      status, nonce, is_exception, 
+      inflow_min, confirmation_amount, block_time, 
+      reject_reason, exception_reason, user_type, 
+      asset_account_type, op_type, create_time, 
+      updater, update_time, token_id, 
+      is_collect, latest_notes)
+    values (#{userId,jdbcType=BIGINT}, #{currencyChainId,jdbcType=BIGINT}, #{protocol,jdbcType=VARCHAR}, 
+      #{currency,jdbcType=VARCHAR}, #{fromAddress,jdbcType=VARCHAR}, #{toAddress,jdbcType=VARCHAR}, 
+      #{txId,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{newPrice,jdbcType=DECIMAL}, 
+      #{fee,jdbcType=DECIMAL}, #{gas,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{nonce,jdbcType=BIGINT}, #{isException,jdbcType=INTEGER}, 
+      #{inflowMin,jdbcType=DECIMAL}, #{confirmationAmount,jdbcType=INTEGER}, #{blockTime,jdbcType=TIMESTAMP}, 
+      #{rejectReason,jdbcType=VARCHAR}, #{exceptionReason,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
+      #{assetAccountType,jdbcType=INTEGER}, #{opType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{tokenId,jdbcType=BIGINT}, 
+      #{isCollect,jdbcType=TINYINT}, #{latestNotes,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.UserCurrencyOrderQueryEntity">
+    update user_currency_order
+    set user_id = #{userId,jdbcType=BIGINT},
+      currency_chain_id = #{currencyChainId,jdbcType=BIGINT},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      from_address = #{fromAddress,jdbcType=VARCHAR},
+      to_address = #{toAddress,jdbcType=VARCHAR},
+      tx_id = #{txId,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      new_price = #{newPrice,jdbcType=DECIMAL},
+      fee = #{fee,jdbcType=DECIMAL},
+      gas = #{gas,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      nonce = #{nonce,jdbcType=BIGINT},
+      is_exception = #{isException,jdbcType=INTEGER},
+      inflow_min = #{inflowMin,jdbcType=DECIMAL},
+      confirmation_amount = #{confirmationAmount,jdbcType=INTEGER},
+      block_time = #{blockTime,jdbcType=TIMESTAMP},
+      reject_reason = #{rejectReason,jdbcType=VARCHAR},
+      exception_reason = #{exceptionReason,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      asset_account_type = #{assetAccountType,jdbcType=INTEGER},
+      op_type = #{opType,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      token_id = #{tokenId,jdbcType=BIGINT},
+      is_collect = #{isCollect,jdbcType=TINYINT},
+      latest_notes = #{latestNotes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, user_id, currency_chain_id, protocol, currency, from_address, to_address, 
+    tx_id, amount, new_price, fee, gas, total, type, status, nonce, is_exception, inflow_min, 
+    confirmation_amount, block_time, reject_reason, exception_reason, user_type, asset_account_type, 
+    op_type, create_time, updater, update_time, token_id, is_collect, latest_notes
+    from user_currency_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, currency_chain_id, protocol, currency, from_address, to_address, 
+    tx_id, amount, new_price, fee, gas, total, type, status, nonce, is_exception, inflow_min, 
+    confirmation_amount, block_time, reject_reason, exception_reason, user_type, asset_account_type, 
+    op_type, create_time, updater, update_time, token_id, is_collect, latest_notes
+    from user_currency_order
+  </select>
+</mapper>

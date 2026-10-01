@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.FreeTradeInternalTransferOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.FreeTradeInternalTransferOrderEntity">
+        <result column="currency" property="currency"/>
+        <result column="usdt_total" property="usdtTotal"/>
+    </resultMap>
+
+    <select id="selectChargeOrders" resultMap="BaseResultMap">
+        SELECT currency, usdt_total
+        FROM superex_free_trade.internal_transfer_order
+        WHERE user_id = #{userId} AND status = 2 AND type IN (1,11) AND update_time >= #{updateTime}
+    </select>
+
+    <select id="selectWithdrawOrders" resultMap="BaseResultMap">
+        SELECT currency, usdt_total
+        FROM superex_free_trade.internal_transfer_order
+        WHERE user_id = #{userId} AND status = 2 AND type IN (2,12) AND update_time >= #{updateTime}
+    </select>
+
+</mapper>

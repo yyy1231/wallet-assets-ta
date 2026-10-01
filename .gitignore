@@ -1,0 +1,45 @@
+# Compiled class file
+*.class
+*.classpath
+*.factorypath
+
+# Log file
+*.log
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IDE Files
+*.iml
+.idea
+.idea/
+.project
+.settings
+target
+.DS_Store
+
+# temp ignore
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# Maven ignore
+.flattened-pom.xml
+
+#testng report
+test-output
+
+#日志文件
+allure-results
+allure-report
+
+#claude code相关
+.claudeignore
+/.claude/
+docs

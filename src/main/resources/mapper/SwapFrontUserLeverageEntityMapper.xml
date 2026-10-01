@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SwapFrontUserLeverageEntityMapper">
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SwapFrontUserLeverageEntity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="tenant_id" jdbcType="BIGINT" property="tenantId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="symbol" jdbcType="VARCHAR" property="symbol"/>
+        <result column="crossed_leverage" jdbcType="INTEGER" property="crossedLeverage"/>
+        <result column="fixed_leverage" jdbcType="INTEGER" property="fixedLeverage"/>
+        <result column="fission_leverage" jdbcType="INTEGER" property="fissionLeverage"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from swap_front_user_leverage
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.novax.entity.mysql.SwapFrontUserLeverageEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into swap_front_user_leverage (tenant_id, user_id, symbol,
+        crossed_leverage, fixed_leverage, fission_leverage,
+        create_time, update_time)
+        values (#{tenantId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{symbol,jdbcType=VARCHAR},
+        #{crossedLeverage,jdbcType=INTEGER}, #{fixedLeverage,jdbcType=INTEGER}, #{fissionLeverage,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.SwapFrontUserLeverageEntity">
+        update swap_front_user_leverage
+        set tenant_id = #{tenantId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=BIGINT},
+        symbol = #{symbol,jdbcType=VARCHAR},
+        crossed_leverage = #{crossedLeverage,jdbcType=INTEGER},
+        fixed_leverage = #{fixedLeverage,jdbcType=INTEGER},
+        fission_leverage = #{fissionLeverage,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, tenant_id, user_id, symbol, crossed_leverage, fixed_leverage, fission_leverage,
+        create_time, update_time
+        from swap_front_user_leverage
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, tenant_id, user_id, symbol, crossed_leverage, fixed_leverage, fission_leverage,
+        create_time, update_time
+        from swap_front_user_leverage
+    </select>
+    <select id="selectByUserAndSymbol" resultMap="BaseResultMap">
+        select * from swap_front_user_leverage
+        where user_id = #{userId,jdbcType=BIGINT}
+        and symbol = #{symbol,jdbcType=VARCHAR}
+    </select>
+</mapper>

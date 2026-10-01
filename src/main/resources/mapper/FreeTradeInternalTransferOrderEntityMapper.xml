@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.FreeTradeInternalTransferOrderEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.FreeTradeInternalTransferOrderEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="currency_id" jdbcType="BIGINT" property="currencyId" />
+    <result column="from_user_id" jdbcType="BIGINT" property="fromUserId" />
+    <result column="account_type" jdbcType="INTEGER" property="accountType" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="account_user_id" jdbcType="BIGINT" property="accountUserId" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="protocol" jdbcType="VARCHAR" property="protocol" />
+    <result column="currency_address" jdbcType="VARCHAR" property="currencyAddress" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="new_price" jdbcType="DECIMAL" property="newPrice" />
+    <result column="usdt_total" jdbcType="DECIMAL" property="usdtTotal" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="reject_reason" jdbcType="VARCHAR" property="rejectReason" />
+    <result column="exception_reason" jdbcType="VARCHAR" property="exceptionReason" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="updater_name" jdbcType="VARCHAR" property="updaterName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_collect" jdbcType="TINYINT" property="isCollect" />
+    <result column="latest_notes" jdbcType="VARCHAR" property="latestNotes" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from internal_transfer_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.FreeTradeInternalTransferOrderEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into internal_transfer_order (user_id, currency_id, from_user_id, 
+      account_type, account, account_user_id, 
+      currency, protocol, currency_address, 
+      amount, fee, total, 
+      new_price, usdt_total, type, 
+      status, reject_reason, exception_reason, 
+      create_time, updater, updater_name, 
+      update_time, is_collect, latest_notes
+      )
+    values (#{userId,jdbcType=BIGINT}, #{currencyId,jdbcType=BIGINT}, #{fromUserId,jdbcType=BIGINT}, 
+      #{accountType,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{accountUserId,jdbcType=BIGINT}, 
+      #{currency,jdbcType=VARCHAR}, #{protocol,jdbcType=VARCHAR}, #{currencyAddress,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{fee,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, 
+      #{newPrice,jdbcType=DECIMAL}, #{usdtTotal,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{rejectReason,jdbcType=VARCHAR}, #{exceptionReason,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=BIGINT}, #{updaterName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isCollect,jdbcType=TINYINT}, #{latestNotes,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.FreeTradeInternalTransferOrderEntity">
+    update internal_transfer_order
+    set user_id = #{userId,jdbcType=BIGINT},
+      currency_id = #{currencyId,jdbcType=BIGINT},
+      from_user_id = #{fromUserId,jdbcType=BIGINT},
+      account_type = #{accountType,jdbcType=INTEGER},
+      account = #{account,jdbcType=VARCHAR},
+      account_user_id = #{accountUserId,jdbcType=BIGINT},
+      currency = #{currency,jdbcType=VARCHAR},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      currency_address = #{currencyAddress,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      fee = #{fee,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      new_price = #{newPrice,jdbcType=DECIMAL},
+      usdt_total = #{usdtTotal,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      reject_reason = #{rejectReason,jdbcType=VARCHAR},
+      exception_reason = #{exceptionReason,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=BIGINT},
+      updater_name = #{updaterName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_collect = #{isCollect,jdbcType=TINYINT},
+      latest_notes = #{latestNotes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, user_id, currency_id, from_user_id, account_type, account, account_user_id, 
+    currency, protocol, currency_address, amount, fee, total, new_price, usdt_total, 
+    type, status, reject_reason, exception_reason, create_time, updater, updater_name, 
+    update_time, is_collect, latest_notes
+    from internal_transfer_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, currency_id, from_user_id, account_type, account, account_user_id, 
+    currency, protocol, currency_address, amount, fee, total, new_price, usdt_total, 
+    type, status, reject_reason, exception_reason, create_time, updater, updater_name, 
+    update_time, is_collect, latest_notes
+    from internal_transfer_order
+  </select>
+</mapper>

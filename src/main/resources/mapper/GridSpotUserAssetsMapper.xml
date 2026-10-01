@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.GridSpotUserAssetsMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.GridSpotUserAssetsEntity">
+        <result column="user_id" property="userId"/>
+        <result column="currency" property="currency"/>
+        <result column="available" property="available"/>
+        <result column="frozen" property="frozen"/>
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT user_id, currency, available, frozen
+        FROM superex_grid_trading.grid_spot_user_assets
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

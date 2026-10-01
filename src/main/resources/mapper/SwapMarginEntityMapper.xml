@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SwapMarginEntityMapper">
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SwapMarginEntity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="symbol" jdbcType="VARCHAR" property="symbol"/>
+        <result column="tier" jdbcType="INTEGER" property="tier"/>
+        <result column="position" jdbcType="BIGINT" property="position"/>
+        <result column="leverage" jdbcType="INTEGER" property="leverage"/>
+        <result column="ratio" jdbcType="DECIMAL" property="ratio"/>
+        <result column="margin" jdbcType="DECIMAL" property="margin"/>
+        <result column="admin" jdbcType="VARCHAR" property="admin"/>
+        <result column="creator" jdbcType="BIGINT" property="creator"/>
+        <result column="updater" jdbcType="BIGINT" property="updater"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from swap_margin
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.novax.entity.mysql.SwapMarginEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into swap_margin (symbol, tier, position,
+        leverage, ratio, margin,
+        admin, creator, updater,
+        create_time, update_time)
+        values (#{symbol,jdbcType=VARCHAR}, #{tier,jdbcType=INTEGER}, #{position,jdbcType=BIGINT},
+        #{leverage,jdbcType=INTEGER}, #{ratio,jdbcType=DECIMAL}, #{margin,jdbcType=DECIMAL},
+        #{admin,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, #{updater,jdbcType=BIGINT},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.SwapMarginEntity">
+        update swap_margin
+        set symbol = #{symbol,jdbcType=VARCHAR},
+        tier = #{tier,jdbcType=INTEGER},
+        position = #{position,jdbcType=BIGINT},
+        leverage = #{leverage,jdbcType=INTEGER},
+        ratio = #{ratio,jdbcType=DECIMAL},
+        margin = #{margin,jdbcType=DECIMAL},
+        admin = #{admin,jdbcType=VARCHAR},
+        creator = #{creator,jdbcType=BIGINT},
+        updater = #{updater,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, symbol, tier, position, leverage, ratio, margin, admin, creator, updater,
+        create_time, update_time
+        from swap_margin
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, symbol, tier, position, leverage, ratio, margin, admin, creator, updater,
+        create_time, update_time
+        from swap_margin
+    </select>
+    <select id="selectTier" resultMap="BaseResultMap">
+        SELECT * from superex_trade.swap_margin
+        where symbol = #{symbol,jdbcType=VARCHAR}
+        and position>=#{position,jdbcType=BIGINT}
+        ORDER BY tier ASC
+        LIMIT 1
+    </select>
+    <select id="selectPosition" resultMap="BaseResultMap">
+        SELECT * from superex_trade.swap_margin
+        where symbol = #{symbol,jdbcType=VARCHAR}
+        and leverage>=#{leverage,jdbcType=BIGINT}
+        ORDER BY leverage ASC
+        LIMIT 1
+    </select>
+    <select id="selectBySymbol" resultType="com.novax.entity.mysql.SwapMarginEntity">
+        SELECT * from superex_trade.swap_margin
+        where symbol = #{symbol,jdbcType=VARCHAR}
+        ORDER BY tier ASC
+    </select>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SpotFinanceRecordQueryMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SpotFinanceRecordQueryEntity">
+        <result column="currency" property="currency"/>
+        <result column="amount" property="amount"/>
+    </resultMap>
+
+    <select id="selectCopyTradingTransferIn" resultMap="BaseResultMap">
+        SELECT currency, amount
+        FROM superex_trade.spot_finance_record
+        WHERE user_id = #{userId} AND status = 1 AND operation IN (300) AND create_time >= #{createTime}
+    </select>
+
+    <select id="selectCopyTradingTransferOut" resultMap="BaseResultMap">
+        SELECT currency, amount
+        FROM superex_trade.spot_finance_record
+        WHERE user_id = #{userId} AND status = 1 AND operation IN (301) AND create_time >= #{createTime}
+    </select>
+
+</mapper>

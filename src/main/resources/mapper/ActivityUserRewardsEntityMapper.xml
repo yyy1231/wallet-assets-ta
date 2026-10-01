@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.ActivityUserRewardsEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.ActivityUserRewardsEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="activity_id" jdbcType="BIGINT" property="activityId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="total_freeze" jdbcType="DECIMAL" property="totalFreeze" />
+    <result column="unfreeze" jdbcType="DECIMAL" property="unfreeze" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from activity_user_rewards
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.ActivityUserRewardsEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into activity_user_rewards (activity_id, user_id, total_freeze, 
+      unfreeze, currency, create_time, 
+      update_time)
+    values (#{activityId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{totalFreeze,jdbcType=DECIMAL}, 
+      #{unfreeze,jdbcType=DECIMAL}, #{currency,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.ActivityUserRewardsEntity">
+    update activity_user_rewards
+    set activity_id = #{activityId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      total_freeze = #{totalFreeze,jdbcType=DECIMAL},
+      unfreeze = #{unfreeze,jdbcType=DECIMAL},
+      currency = #{currency,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, activity_id, user_id, total_freeze, unfreeze, currency, create_time, update_time
+    from activity_user_rewards
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, activity_id, user_id, total_freeze, unfreeze, currency, create_time, update_time
+    from activity_user_rewards
+  </select>
+</mapper>

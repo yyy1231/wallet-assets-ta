@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.AdminAddressEntityMapper">
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.AdminAddressEntity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="protocol" jdbcType="VARCHAR" property="protocol"/>
+        <result column="group_id" jdbcType="BIGINT" property="groupId"/>
+        <result column="is_platform" jdbcType="TINYINT" property="isPlatform"/>
+        <result column="currency" jdbcType="VARCHAR" property="currency"/>
+        <result column="chain_id" jdbcType="BIGINT" property="chainId"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="memo" jdbcType="VARCHAR" property="memo"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="creator" jdbcType="BIGINT" property="creator"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="updater" jdbcType="BIGINT" property="updater"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from admin_address
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.novax.entity.mysql.AdminAddressEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into admin_address (protocol, group_id, is_platform,
+        currency, chain_id, address,
+        memo, remark, status,
+        is_deleted, creator, create_time,
+        updater, update_time)
+        values (#{protocol,jdbcType=VARCHAR}, #{groupId,jdbcType=BIGINT}, #{isPlatform,jdbcType=TINYINT},
+        #{currency,jdbcType=VARCHAR}, #{chainId,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR},
+        #{memo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT},
+        #{isDeleted,jdbcType=TINYINT}, #{creator,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updater,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.AdminAddressEntity">
+        update admin_address
+        set protocol = #{protocol,jdbcType=VARCHAR},
+        group_id = #{groupId,jdbcType=BIGINT},
+        is_platform = #{isPlatform,jdbcType=TINYINT},
+        currency = #{currency,jdbcType=VARCHAR},
+        chain_id = #{chainId,jdbcType=BIGINT},
+        address = #{address,jdbcType=VARCHAR},
+        memo = #{memo,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=TINYINT},
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+        creator = #{creator,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        updater = #{updater,jdbcType=BIGINT},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, protocol, group_id, is_platform, currency, chain_id, address, memo, remark,
+        status, is_deleted, creator, create_time, updater, update_time
+        from admin_address
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, protocol, group_id, is_platform, currency, chain_id, address, memo, remark,
+        status, is_deleted, creator, create_time, updater, update_time
+        from admin_address
+    </select>
+    <select id="selectByProtocol" resultMap="BaseResultMap">
+        select * from admin_address
+        where protocol = #{protocol,jdbcType=VARCHAR}
+        and is_platform = 1
+        and status=1
+        and group_id=1
+    </select>
+</mapper>

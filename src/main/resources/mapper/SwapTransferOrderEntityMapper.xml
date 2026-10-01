@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SwapTransferOrderEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SwapTransferOrderEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="new_price" jdbcType="DECIMAL" property="newPrice" />
+    <result column="current" jdbcType="TINYINT" property="current" />
+    <result column="current_sub_account_id" jdbcType="BIGINT" property="currentSubAccountId" />
+    <result column="target" jdbcType="TINYINT" property="target" />
+    <result column="target_sub_account_id" jdbcType="BIGINT" property="targetSubAccountId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="reject_reason" jdbcType="VARCHAR" property="rejectReason" />
+    <result column="is_exception" jdbcType="INTEGER" property="isException" />
+    <result column="exception_reason" jdbcType="VARCHAR" property="exceptionReason" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from transfer_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.SwapTransferOrderEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into transfer_order (user_id, currency, symbol, 
+      amount, new_price, current, 
+      current_sub_account_id, target, target_sub_account_id, 
+      type, status, reject_reason, 
+      is_exception, exception_reason, updater, 
+      create_time, update_time)
+    values (#{userId,jdbcType=BIGINT}, #{currency,jdbcType=VARCHAR}, #{symbol,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{newPrice,jdbcType=DECIMAL}, #{current,jdbcType=TINYINT}, 
+      #{currentSubAccountId,jdbcType=BIGINT}, #{target,jdbcType=TINYINT}, #{targetSubAccountId,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{rejectReason,jdbcType=VARCHAR}, 
+      #{isException,jdbcType=INTEGER}, #{exceptionReason,jdbcType=VARCHAR}, #{updater,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.SwapTransferOrderEntity">
+    update transfer_order
+    set user_id = #{userId,jdbcType=BIGINT},
+      currency = #{currency,jdbcType=VARCHAR},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      new_price = #{newPrice,jdbcType=DECIMAL},
+      current = #{current,jdbcType=TINYINT},
+      current_sub_account_id = #{currentSubAccountId,jdbcType=BIGINT},
+      target = #{target,jdbcType=TINYINT},
+      target_sub_account_id = #{targetSubAccountId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      reject_reason = #{rejectReason,jdbcType=VARCHAR},
+      is_exception = #{isException,jdbcType=INTEGER},
+      exception_reason = #{exceptionReason,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, user_id, currency, symbol, amount, new_price, current, current_sub_account_id, 
+    target, target_sub_account_id, type, status, reject_reason, is_exception, exception_reason, 
+    updater, create_time, update_time
+    from transfer_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, currency, symbol, amount, new_price, current, current_sub_account_id, 
+    target, target_sub_account_id, type, status, reject_reason, is_exception, exception_reason, 
+    updater, create_time, update_time
+    from transfer_order
+  </select>
+</mapper>

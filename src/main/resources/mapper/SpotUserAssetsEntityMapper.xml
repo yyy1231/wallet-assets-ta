@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SpotUserAssetsEntityMapper">
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SpotUserAssetsEntity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="tenant_id" jdbcType="BIGINT" property="tenantId"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="currency" jdbcType="VARCHAR" property="currency"/>
+        <result column="available" jdbcType="DECIMAL" property="available"/>
+        <result column="frozen" jdbcType="DECIMAL" property="frozen"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from spot_user_assets
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.novax.entity.mysql.SpotUserAssetsEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into spot_user_assets (tenant_id, user_id, currency,
+        available, frozen, create_time,
+        update_time)
+        values (#{tenantId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{currency,jdbcType=VARCHAR},
+        #{available,jdbcType=DECIMAL}, #{frozen,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.SpotUserAssetsEntity">
+        update spot_user_assets
+        set tenant_id = #{tenantId,jdbcType=BIGINT},
+        user_id = #{userId,jdbcType=BIGINT},
+        currency = #{currency,jdbcType=VARCHAR},
+        available = #{available,jdbcType=DECIMAL},
+        frozen = #{frozen,jdbcType=DECIMAL},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, tenant_id, user_id, currency, available, frozen, create_time, update_time
+        from spot_user_assets
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, tenant_id, user_id, currency, available, frozen, create_time, update_time
+        from spot_user_assets
+    </select>
+    <select id="selectUserAssets" resultMap="BaseResultMap">
+        select * from `superex_trade`.spot_user_assets
+        where user_id = #{userId,jdbcType=BIGINT}
+    </select>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT * FROM superex_trade.spot_user_assets
+        WHERE user_id = #{userId,jdbcType=BIGINT}
+        and currency=#{currency,jdbcType=VARCHAR}
+        and available=#{available,jdbcType=DECIMAL}
+    </select>
+    <select id="selectByCurrency" resultMap="BaseResultMap">
+        select * from spot_user_assets
+        where user_id = #{userId,jdbcType=BIGINT}
+        <if test="currency!=null and currency!=''">
+            and currency = #{currency,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

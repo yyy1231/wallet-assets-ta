@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.ActivityUserRewardsMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.ActivityUserRewardsEntity">
+        <result column="user_id" property="userId"/>
+        <result column="currency" property="currency"/>
+        <result column="total_freeze" property="totalFreeze"/>
+        <result column="unfreeze" property="unfreeze"/>
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT user_id, currency, total_freeze, unfreeze
+        FROM superex_resource.activity_user_rewards
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SpotOrderRecordEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SpotOrderRecordEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="trade_number" jdbcType="DECIMAL" property="tradeNumber" />
+    <result column="total_currency" jdbcType="VARCHAR" property="totalCurrency" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="usdt_price" jdbcType="DECIMAL" property="usdtPrice" />
+    <result column="trade_type" jdbcType="INTEGER" property="tradeType" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="usdt_fee" jdbcType="DECIMAL" property="usdtFee" />
+    <result column="fee_currency" jdbcType="VARCHAR" property="feeCurrency" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_time_key" jdbcType="TIMESTAMP" property="createTimeKey" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from spot_order_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.SpotOrderRecordEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into spot_order_record (user_id, region, order_id, 
+      symbol, price, trade_number, 
+      total_currency, total, usdt_price, 
+      trade_type, fee, usdt_fee, 
+      fee_currency, status, create_time, 
+      create_time_key)
+    values (#{userId,jdbcType=BIGINT}, #{region,jdbcType=VARCHAR}, #{orderId,jdbcType=BIGINT}, 
+      #{symbol,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{tradeNumber,jdbcType=DECIMAL}, 
+      #{totalCurrency,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, #{usdtPrice,jdbcType=DECIMAL}, 
+      #{tradeType,jdbcType=INTEGER}, #{fee,jdbcType=DECIMAL}, #{usdtFee,jdbcType=DECIMAL}, 
+      #{feeCurrency,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createTimeKey,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.SpotOrderRecordEntity">
+    update spot_order_record
+    set user_id = #{userId,jdbcType=BIGINT},
+      region = #{region,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=BIGINT},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      trade_number = #{tradeNumber,jdbcType=DECIMAL},
+      total_currency = #{totalCurrency,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DECIMAL},
+      usdt_price = #{usdtPrice,jdbcType=DECIMAL},
+      trade_type = #{tradeType,jdbcType=INTEGER},
+      fee = #{fee,jdbcType=DECIMAL},
+      usdt_fee = #{usdtFee,jdbcType=DECIMAL},
+      fee_currency = #{feeCurrency,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_time_key = #{createTimeKey,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, user_id, region, order_id, symbol, price, trade_number, total_currency, 
+    total, usdt_price, trade_type, fee, usdt_fee, fee_currency, status, create_time, 
+    create_time_key
+    from spot_order_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, region, order_id, symbol, price, trade_number, total_currency, 
+    total, usdt_price, trade_type, fee, usdt_fee, fee_currency, status, create_time, 
+    create_time_key
+    from spot_order_record
+  </select>
+</mapper>

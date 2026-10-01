@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置生成器 -->
+<generatorConfiguration>
+    <!-- MyBatis3Simple风格 -->
+    <context id="simple" targetRuntime="MyBatis3Simple">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否。 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://******:3306/******?useSSL=false"
+                        userId="******"
+                        password="******">
+            <!-- 设置为true就只读取superex_trade下的表, 否则会优先读取到mysql的user表  -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 生成Entity的包名和位置 -->
+        <javaModelGenerator targetPackage="com.novax.entity.mysql" targetProject="src/main/java"/>
+
+        <!-- 生成XML映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <!-- 生成Mapper接口的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.novax.mapper" targetProject="src/main/java"/>
+
+        <!-- 要生成对应表配置 -->
+<!--        <table tableName="task_et_rewards" domainObjectName="TaskEtRewardsEntity" >-->
+<!--            <generatedKey column="id" sqlStatement="MYSQL" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="otc_user_assets" domainObjectName="OtcUserAssetsEntity" >
+            <generatedKey column="id" sqlStatement="MYSQL" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

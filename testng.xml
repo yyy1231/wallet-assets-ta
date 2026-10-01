@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="5" name="assets" parallel="classes" thread-count="7" data-provider-thread-count="15"
+       group-by-instances="false">
+    <!--  group-by-instances="true"  即使parallel="classes" 测试类也是顺序执行的 -->
+    <groups>
+        <run>
+            <include name="smokeTest"/>
+        </run>
+    </groups>
+
+    <!-- 全局定义：确保 BaseTest 的 globalSetup 能拿到这两个值 -->
+    <parameter name="testEnv" value="test"/>
+    <parameter name="devEnv" value="dev"/>
+
+    <!--资产测试 使用测试环境配置-->
+    <test name="assets_test" enabled="true">
+        <parameter name="currentEnv" value="test"/>
+        <classes>
+            <class name="com.novax.testcase.assets.WalletIncomeTest"/>
+            <class name="com.novax.testcase.assets.TodayTenMinAssetTest"/>
+            <class name="com.novax.testcase.assets.SpotIncomeTest"/>
+            <class name="com.novax.testcase.assets.SpotCoinIncomeTest"/>
+            <class name="com.novax.testcase.assets.SwapIncomeTest"/>
+            <class name="com.novax.testcase.assets.MultiCurrencySwapIncomeTest"/>
+            <class name="com.novax.testcase.assets.OtcAssetsTest"/>
+        </classes>
+    </test>
+
+    <!--    监听器    -->
+    <listeners>
+        <listener class-name="com.novax.util.AllureParamRenamer"/>
+        <listener class-name="com.novax.util.AllureTestNameListener"/>
+    </listeners>
+</suite>

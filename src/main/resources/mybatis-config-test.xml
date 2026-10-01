@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--    <properties resource="application_dev.properties"/>-->
+    <properties resource="application_test.properties"/>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+
+                <!-- 针对并发的关键配置 -->
+                <!-- 最大活动连接数 -->
+                <property name="poolMaximumActiveConnections" value="100"/>
+                <!-- 最大空闲连接数 -->
+                <property name="poolMaximumIdleConnections" value="20"/>
+                <!-- 一个连接被借出后的最大活动时间（强制回收时间），超过此时间池子将强行收回该连接 -->
+                <!-- mybatis已经默认配置了 可以不显式写在 XML 里-->
+                <!--                <property name="poolMaximumCheckoutTime" value="20000"/>-->
+                <!-- 强迫检查连接是否可用，防止 Communications link failure -->
+                <property name="poolPingEnabled" value="true"/>
+                <property name="poolPingQuery" value="SELECT 1"/>
+                <!-- 脚本执行总时长10min左右 SELECT 1（耗时通常小于 1ms），对总时长的影响几乎可以忽略不计（可能只多了几秒钟）-->
+                <!-- 好处：彻底根除 Communications link failure -->
+                <property name="poolPingConnectionsNotUsedFor" value="0"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/ActivityUserRewardsEntityMapper.xml"/>
+        <mapper resource="mapper/ActivityUserRewardsMapper.xml"/>
+        <mapper resource="mapper/AdminAddressEntityMapper.xml"/>
+        <mapper resource="mapper/CurrencyAddressInfoEntityMapper.xml"/>
+        <mapper resource="mapper/CurrencyChainConfigEntityMapper.xml"/>
+        <mapper resource="mapper/CurrencyChainEntityMapper.xml"/>
+        <mapper resource="mapper/CurrencyNewPriceEntityMapper.xml"/>
+        <mapper resource="mapper/CurrencyNewPriceMapper.xml"/>
+        <mapper resource="mapper/FinanceAccountEntityMapper.xml"/>
+        <mapper resource="mapper/FinanceAccountMapper.xml"/>
+        <mapper resource="mapper/FinanceDepositEntityMapper.xml"/>
+        <mapper resource="mapper/FinanceDepositMapper.xml"/>
+        <mapper resource="mapper/FreeTradeChainTransferOrderEntityMapper.xml"/>
+        <mapper resource="mapper/FreeTradeChainTransferOrderMapper.xml"/>
+        <mapper resource="mapper/FreeTradeInternalTransferOrderEntityMapper.xml"/>
+        <mapper resource="mapper/FreeTradeInternalTransferOrderMapper.xml"/>
+        <mapper resource="mapper/FreeTradeSpotUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/FreeTradeSpotUserAssetsMapper.xml"/>
+        <mapper resource="mapper/GridSpotUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/GridSpotUserAssetsMapper.xml"/>
+        <mapper resource="mapper/InternalTransferOrderEntityMapper.xml"/>
+        <mapper resource="mapper/InternalTransferOrderMapper.xml"/>
+        <mapper resource="mapper/MultiCurrencySwapPositionEntityMapper.xml"/>
+        <mapper resource="mapper/MultiCurrencySwapPositionMapper.xml"/>
+        <mapper resource="mapper/MultiCurrencySwapUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/MultiCurrencySwapUserAssetsMapper.xml"/>
+        <mapper resource="mapper/OtcUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/SpotFinanceRecordEntityMapper.xml"/>
+        <mapper resource="mapper/SpotFinanceRecordQueryEntityMapper.xml"/>
+        <mapper resource="mapper/SpotFinanceRecordQueryMapper.xml"/>
+        <mapper resource="mapper/SpotOrderRecordEntityMapper.xml"/>
+        <mapper resource="mapper/SpotOrderRecordMapper.xml"/>
+        <mapper resource="mapper/SpotTransferOrderEntityMapper.xml"/>
+        <mapper resource="mapper/SpotTransferOrderMapper.xml"/>
+        <mapper resource="mapper/SpotUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/SpotUserAssetsMapper.xml"/>
+        <mapper resource="mapper/SwapCopyUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/SwapCopyUserAssetsMapper.xml"/>
+        <mapper resource="mapper/SwapFrontPositionEntityMapper.xml"/>
+        <mapper resource="mapper/SwapTransferOrderEntityMapper.xml"/>
+        <mapper resource="mapper/SwapTransferOrderMapper.xml"/>
+        <mapper resource="mapper/SwapUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/SwapUserAssetsMapper.xml"/>
+        <mapper resource="mapper/TaskEtRewardsEntityMapper.xml"/>
+        <mapper resource="mapper/TaskEtRewardsMapper.xml"/>
+        <mapper resource="mapper/TransferOrderEntityMapper.xml"/>
+        <mapper resource="mapper/TransferOrderMapper.xml"/>
+        <mapper resource="mapper/UserChargeAddressEntityMapper.xml"/>
+        <mapper resource="mapper/UserCurrencyOrderEntityMapper.xml"/>
+        <mapper resource="mapper/UserCurrencyOrderQueryEntityMapper.xml"/>
+        <mapper resource="mapper/UserCurrencyOrderQueryMapper.xml"/>
+        <mapper resource="mapper/UserEntityMapper.xml"/>
+        <mapper resource="mapper/SwapFrontUserAssetsEntityMapper.xml"/>
+        <mapper resource="mapper/SwapFrontUserConfigEntityMapper.xml"/>
+        <mapper resource="mapper/SwapFrontUserLeverageEntityMapper.xml"/>
+        <mapper resource="mapper/SwapMarginEntityMapper.xml"/>
+        <mapper resource="mapper/OtcUserAssetsEntityMapper.xml"/>
+    </mappers>
+</configuration>

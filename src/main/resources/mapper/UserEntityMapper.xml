@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.UserEntityMapper">
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.UserEntity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="tenant_id" jdbcType="BIGINT" property="tenantId"/>
+        <result column="area_code" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="head_url" jdbcType="VARCHAR" property="headUrl"/>
+        <result column="true_name" jdbcType="VARCHAR" property="trueName"/>
+        <result column="nationality" jdbcType="VARCHAR" property="nationality"/>
+        <result column="id_card_type" jdbcType="INTEGER" property="idCardType"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="auth_level" jdbcType="INTEGER" property="authLevel"/>
+        <result column="is_auth" jdbcType="INTEGER" property="isAuth"/>
+        <result column="assistant_currency" jdbcType="VARCHAR" property="assistantCurrency"/>
+        <result column="language" jdbcType="VARCHAR" property="language"/>
+        <result column="fee_flag" jdbcType="INTEGER" property="feeFlag"/>
+        <result column="invite_code" jdbcType="VARCHAR" property="inviteCode"/>
+        <result column="inviter_id" jdbcType="BIGINT" property="inviterId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="level_update_time" jdbcType="TIMESTAMP" property="levelUpdateTime"/>
+        <result column="spot_discount" jdbcType="INTEGER" property="spotDiscount"/>
+        <result column="swap_discount" jdbcType="INTEGER" property="swapDiscount"/>
+        <result column="swap_currency_discount" jdbcType="INTEGER" property="swapCurrencyDiscount"/>
+        <result column="google_key" jdbcType="VARCHAR" property="googleKey"/>
+        <result column="last_modified" jdbcType="TIMESTAMP" property="lastModified"/>
+        <result column="is_merchant" jdbcType="INTEGER" property="isMerchant"/>
+        <result column="is_swap_opened" jdbcType="INTEGER" property="isSwapOpened"/>
+        <result column="is_answer_passed" jdbcType="INTEGER" property="isAnswerPassed"/>
+        <result column="swap_status" jdbcType="INTEGER" property="swapStatus"/>
+        <result column="is_limit_spot" jdbcType="INTEGER" property="isLimitSpot"/>
+        <result column="is_limit_withdrawal" jdbcType="INTEGER" property="isLimitWithdrawal"/>
+        <result column="limit_market" jdbcType="VARCHAR" property="limitMarket"/>
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted"/>
+        <result column="is_statistics" jdbcType="INTEGER" property="isStatistics"/>
+        <result column="is_whitelist" jdbcType="INTEGER" property="isWhitelist"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="register_client" jdbcType="INTEGER" property="registerClient"/>
+        <result column="register_ip" jdbcType="VARCHAR" property="registerIp"/>
+        <result column="region" jdbcType="VARCHAR" property="region"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.novax.entity.mysql.UserEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into superex_usercenter.user (tenant_id, area_code, phone,
+        email, password, salt,
+        nickname, head_url, true_name,
+        nationality, id_card_type, id_card,
+        auth_level, is_auth, assistant_currency,
+        language, fee_flag, invite_code,
+        inviter_id, status, level,
+        level_update_time, spot_discount, swap_discount,
+        swap_currency_discount, google_key, last_modified,
+        is_merchant, is_swap_opened, is_answer_passed,
+        swap_status, is_limit_spot, is_limit_withdrawal,
+        limit_market, is_deleted, is_statistics,
+        is_whitelist, type, register_client,
+        register_ip, region, create_time,
+        update_time)
+        values (#{tenantId,jdbcType=BIGINT}, #{areaCode,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
+        #{nickname,jdbcType=VARCHAR}, #{headUrl,jdbcType=VARCHAR}, #{trueName,jdbcType=VARCHAR},
+        #{nationality,jdbcType=VARCHAR}, #{idCardType,jdbcType=INTEGER}, #{idCard,jdbcType=VARCHAR},
+        #{authLevel,jdbcType=INTEGER}, #{isAuth,jdbcType=INTEGER}, #{assistantCurrency,jdbcType=VARCHAR},
+        #{language,jdbcType=VARCHAR}, #{feeFlag,jdbcType=INTEGER}, #{inviteCode,jdbcType=VARCHAR},
+        #{inviterId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{level,jdbcType=INTEGER},
+        #{levelUpdateTime,jdbcType=TIMESTAMP}, #{spotDiscount,jdbcType=INTEGER}, #{swapDiscount,jdbcType=INTEGER},
+        #{swapCurrencyDiscount,jdbcType=INTEGER}, #{googleKey,jdbcType=VARCHAR}, #{lastModified,jdbcType=TIMESTAMP},
+        #{isMerchant,jdbcType=INTEGER}, #{isSwapOpened,jdbcType=INTEGER}, #{isAnswerPassed,jdbcType=INTEGER},
+        #{swapStatus,jdbcType=INTEGER}, #{isLimitSpot,jdbcType=INTEGER}, #{isLimitWithdrawal,jdbcType=INTEGER},
+        #{limitMarket,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER}, #{isStatistics,jdbcType=INTEGER},
+        #{isWhitelist,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{registerClient,jdbcType=INTEGER},
+        #{registerIp,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.UserEntity">
+        update superex_usercenter.user
+        set tenant_id = #{tenantId,jdbcType=BIGINT},
+        area_code = #{areaCode,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        salt = #{salt,jdbcType=VARCHAR},
+        nickname = #{nickname,jdbcType=VARCHAR},
+        head_url = #{headUrl,jdbcType=VARCHAR},
+        true_name = #{trueName,jdbcType=VARCHAR},
+        nationality = #{nationality,jdbcType=VARCHAR},
+        id_card_type = #{idCardType,jdbcType=INTEGER},
+        id_card = #{idCard,jdbcType=VARCHAR},
+        auth_level = #{authLevel,jdbcType=INTEGER},
+        is_auth = #{isAuth,jdbcType=INTEGER},
+        assistant_currency = #{assistantCurrency,jdbcType=VARCHAR},
+        language = #{language,jdbcType=VARCHAR},
+        fee_flag = #{feeFlag,jdbcType=INTEGER},
+        invite_code = #{inviteCode,jdbcType=VARCHAR},
+        inviter_id = #{inviterId,jdbcType=BIGINT},
+        status = #{status,jdbcType=INTEGER},
+        level = #{level,jdbcType=INTEGER},
+        level_update_time = #{levelUpdateTime,jdbcType=TIMESTAMP},
+        spot_discount = #{spotDiscount,jdbcType=INTEGER},
+        swap_discount = #{swapDiscount,jdbcType=INTEGER},
+        swap_currency_discount = #{swapCurrencyDiscount,jdbcType=INTEGER},
+        google_key = #{googleKey,jdbcType=VARCHAR},
+        last_modified = #{lastModified,jdbcType=TIMESTAMP},
+        is_merchant = #{isMerchant,jdbcType=INTEGER},
+        is_swap_opened = #{isSwapOpened,jdbcType=INTEGER},
+        is_answer_passed = #{isAnswerPassed,jdbcType=INTEGER},
+        swap_status = #{swapStatus,jdbcType=INTEGER},
+        is_limit_spot = #{isLimitSpot,jdbcType=INTEGER},
+        is_limit_withdrawal = #{isLimitWithdrawal,jdbcType=INTEGER},
+        limit_market = #{limitMarket,jdbcType=VARCHAR},
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+        is_statistics = #{isStatistics,jdbcType=INTEGER},
+        is_whitelist = #{isWhitelist,jdbcType=INTEGER},
+        type = #{type,jdbcType=INTEGER},
+        register_client = #{registerClient,jdbcType=INTEGER},
+        register_ip = #{registerIp,jdbcType=VARCHAR},
+        region = #{region,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select * from superex_usercenter.user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, tenant_id, area_code, phone, email, password, salt, nickname, head_url,
+        true_name, nationality, id_card_type, id_card, auth_level, is_auth, assistant_currency,
+        language, fee_flag, invite_code, inviter_id, status, level, level_update_time, spot_discount,
+        swap_discount, swap_currency_discount, google_key, last_modified, is_merchant, is_swap_opened,
+        is_answer_passed, swap_status, is_limit_spot, is_limit_withdrawal, limit_market,
+        is_deleted, is_statistics, is_whitelist, type, register_client, register_ip, region,
+        create_time, update_time
+        from user
+    </select>
+    <select id="selectByEmail" resultMap="BaseResultMap">
+        select * from superex_usercenter.user
+        where email = #{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectTestUsers" resultMap="BaseResultMap">
+        select * from superex_usercenter.user
+        where email Like #{email}
+        <if test="from!=null">
+            and create_time >= #{from,jdbcType=TIMESTAMP}
+        </if>
+        <if test="to!=null">
+            and create_time <![CDATA[<]]> #{to,jdbcType=TIMESTAMP}
+        </if>
+        order by create_time ASC
+    </select>
+</mapper>

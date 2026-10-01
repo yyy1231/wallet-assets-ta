@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.MultiCurrencySwapPositionEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.MultiCurrencySwapPositionEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tenant_id" jdbcType="BIGINT" property="tenantId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="mode" jdbcType="INTEGER" property="mode" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="cost_open" jdbcType="DECIMAL" property="costOpen" />
+    <result column="volume" jdbcType="DECIMAL" property="volume" />
+    <result column="frozen" jdbcType="DECIMAL" property="frozen" />
+    <result column="margin" jdbcType="DECIMAL" property="margin" />
+    <result column="add_margin" jdbcType="DECIMAL" property="addMargin" />
+    <result column="leverage" jdbcType="INTEGER" property="leverage" />
+    <result column="direction" jdbcType="INTEGER" property="direction" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from multi_currency_swap_position
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.MultiCurrencySwapPositionEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into multi_currency_swap_position (tenant_id, user_id, mode, 
+      symbol, currency, cost_open, 
+      volume, frozen, margin, 
+      add_margin, leverage, direction, 
+      create_time, update_time)
+    values (#{tenantId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{mode,jdbcType=INTEGER}, 
+      #{symbol,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{costOpen,jdbcType=DECIMAL}, 
+      #{volume,jdbcType=DECIMAL}, #{frozen,jdbcType=DECIMAL}, #{margin,jdbcType=DECIMAL}, 
+      #{addMargin,jdbcType=DECIMAL}, #{leverage,jdbcType=INTEGER}, #{direction,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.MultiCurrencySwapPositionEntity">
+    update multi_currency_swap_position
+    set tenant_id = #{tenantId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      mode = #{mode,jdbcType=INTEGER},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      cost_open = #{costOpen,jdbcType=DECIMAL},
+      volume = #{volume,jdbcType=DECIMAL},
+      frozen = #{frozen,jdbcType=DECIMAL},
+      margin = #{margin,jdbcType=DECIMAL},
+      add_margin = #{addMargin,jdbcType=DECIMAL},
+      leverage = #{leverage,jdbcType=INTEGER},
+      direction = #{direction,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, tenant_id, user_id, mode, symbol, currency, cost_open, volume, frozen, 
+    margin, add_margin, leverage, direction, create_time, update_time
+    from multi_currency_swap_position
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, tenant_id, user_id, mode, symbol, currency, cost_open, volume, frozen, 
+    margin, add_margin, leverage, direction, create_time, update_time
+    from multi_currency_swap_position
+  </select>
+</mapper>

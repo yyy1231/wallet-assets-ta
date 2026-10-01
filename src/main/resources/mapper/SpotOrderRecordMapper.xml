@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SpotOrderRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SpotOrderRecordEntity">
+        <result column="symbol" property="symbol"/>
+        <result column="trade_type" property="tradeType"/>
+        <result column="usdt_price" property="usdtPrice"/>
+        <result column="total_currency" property="totalCurrency"/>
+    </resultMap>
+
+    <select id="selectTodayOrders" resultMap="BaseResultMap">
+        SELECT symbol, trade_type, usdt_price, total_currency
+        FROM superex_big_data.spot_order_record
+        WHERE user_id = #{userId} AND create_time > #{createTime}
+        ORDER BY create_time DESC, id DESC
+    </select>
+
+</mapper>

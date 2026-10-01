@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.SpotFinanceRecordQueryEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.SpotFinanceRecordQueryEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="tenant_id" jdbcType="BIGINT" property="tenantId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="operation" jdbcType="INTEGER" property="operation" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="invitee_id" jdbcType="BIGINT" property="inviteeId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from spot_finance_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.SpotFinanceRecordQueryEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into spot_finance_record (tenant_id, user_id, order_id, 
+      symbol, currency, price, 
+      operation, amount, status, 
+      create_time, invitee_id)
+    values (#{tenantId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{symbol,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{operation,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{inviteeId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.SpotFinanceRecordQueryEntity">
+    update spot_finance_record
+    set tenant_id = #{tenantId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      operation = #{operation,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      invitee_id = #{inviteeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, tenant_id, user_id, order_id, symbol, currency, price, operation, amount, 
+    status, create_time, invitee_id
+    from spot_finance_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, tenant_id, user_id, order_id, symbol, currency, price, operation, amount, 
+    status, create_time, invitee_id
+    from spot_finance_record
+  </select>
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.CurrencyChainEntityMapper">
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.CurrencyChainEntity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="currency" jdbcType="VARCHAR" property="currency"/>
+        <result column="protocol" jdbcType="VARCHAR" property="protocol"/>
+        <result column="currency_type" jdbcType="TINYINT" property="currencyType"/>
+        <result column="chain_name" jdbcType="VARCHAR" property="chainName"/>
+        <result column="smart_contract_address" jdbcType="VARCHAR" property="smartContractAddress"/>
+        <result column="gas_address" jdbcType="VARCHAR" property="gasAddress"/>
+        <result column="inflow_confirm_number" jdbcType="INTEGER" property="inflowConfirmNumber"/>
+        <result column="available_confirm_number" jdbcType="INTEGER" property="availableConfirmNumber"/>
+        <result column="outflow_confirm_number" jdbcType="INTEGER" property="outflowConfirmNumber"/>
+        <result column="inflow_min" jdbcType="DECIMAL" property="inflowMin"/>
+        <result column="fee_type" jdbcType="TINYINT" property="feeType"/>
+        <result column="outflow_fee" jdbcType="DECIMAL" property="outflowFee"/>
+        <result column="outflow_fee_rate" jdbcType="DECIMAL" property="outflowFeeRate"/>
+        <result column="outflow_min" jdbcType="DECIMAL" property="outflowMin"/>
+        <result column="outflow_max" jdbcType="DECIMAL" property="outflowMax"/>
+        <result column="outflow_automatic" jdbcType="DECIMAL" property="outflowAutomatic"/>
+        <result column="currency_digit" jdbcType="INTEGER" property="currencyDigit"/>
+        <result column="memo_regex" jdbcType="VARCHAR" property="memoRegex"/>
+        <result column="inflow_type" jdbcType="INTEGER" property="inflowType"/>
+        <result column="outflow_type" jdbcType="INTEGER" property="outflowType"/>
+        <result column="caution_number" jdbcType="DECIMAL" property="cautionNumber"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from currency_chain
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.novax.entity.mysql.CurrencyChainEntity">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into currency_chain (currency, protocol, currency_type,
+        chain_name, smart_contract_address, gas_address,
+        inflow_confirm_number, available_confirm_number,
+        outflow_confirm_number, inflow_min, fee_type,
+        outflow_fee, outflow_fee_rate, outflow_min,
+        outflow_max, outflow_automatic, currency_digit,
+        memo_regex, inflow_type, outflow_type,
+        caution_number, status, create_time,
+        update_time)
+        values (#{currency,jdbcType=VARCHAR}, #{protocol,jdbcType=VARCHAR}, #{currencyType,jdbcType=TINYINT},
+        #{chainName,jdbcType=VARCHAR}, #{smartContractAddress,jdbcType=VARCHAR}, #{gasAddress,jdbcType=VARCHAR},
+        #{inflowConfirmNumber,jdbcType=INTEGER}, #{availableConfirmNumber,jdbcType=INTEGER},
+        #{outflowConfirmNumber,jdbcType=INTEGER}, #{inflowMin,jdbcType=DECIMAL}, #{feeType,jdbcType=TINYINT},
+        #{outflowFee,jdbcType=DECIMAL}, #{outflowFeeRate,jdbcType=DECIMAL}, #{outflowMin,jdbcType=DECIMAL},
+        #{outflowMax,jdbcType=DECIMAL}, #{outflowAutomatic,jdbcType=DECIMAL}, #{currencyDigit,jdbcType=INTEGER},
+        #{memoRegex,jdbcType=VARCHAR}, #{inflowType,jdbcType=INTEGER}, #{outflowType,jdbcType=INTEGER},
+        #{cautionNumber,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.CurrencyChainEntity">
+        update currency_chain
+        set currency = #{currency,jdbcType=VARCHAR},
+        protocol = #{protocol,jdbcType=VARCHAR},
+        currency_type = #{currencyType,jdbcType=TINYINT},
+        chain_name = #{chainName,jdbcType=VARCHAR},
+        smart_contract_address = #{smartContractAddress,jdbcType=VARCHAR},
+        gas_address = #{gasAddress,jdbcType=VARCHAR},
+        inflow_confirm_number = #{inflowConfirmNumber,jdbcType=INTEGER},
+        available_confirm_number = #{availableConfirmNumber,jdbcType=INTEGER},
+        outflow_confirm_number = #{outflowConfirmNumber,jdbcType=INTEGER},
+        inflow_min = #{inflowMin,jdbcType=DECIMAL},
+        fee_type = #{feeType,jdbcType=TINYINT},
+        outflow_fee = #{outflowFee,jdbcType=DECIMAL},
+        outflow_fee_rate = #{outflowFeeRate,jdbcType=DECIMAL},
+        outflow_min = #{outflowMin,jdbcType=DECIMAL},
+        outflow_max = #{outflowMax,jdbcType=DECIMAL},
+        outflow_automatic = #{outflowAutomatic,jdbcType=DECIMAL},
+        currency_digit = #{currencyDigit,jdbcType=INTEGER},
+        memo_regex = #{memoRegex,jdbcType=VARCHAR},
+        inflow_type = #{inflowType,jdbcType=INTEGER},
+        outflow_type = #{outflowType,jdbcType=INTEGER},
+        caution_number = #{cautionNumber,jdbcType=DECIMAL},
+        status = #{status,jdbcType=TINYINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select id, currency, protocol, currency_type, chain_name, smart_contract_address,
+        gas_address, inflow_confirm_number, available_confirm_number, outflow_confirm_number,
+        inflow_min, fee_type, outflow_fee, outflow_fee_rate, outflow_min, outflow_max, outflow_automatic,
+        currency_digit, memo_regex, inflow_type, outflow_type, caution_number, status, create_time,
+        update_time
+        from currency_chain
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select id, currency, protocol, currency_type, chain_name, smart_contract_address,
+        gas_address, inflow_confirm_number, available_confirm_number, outflow_confirm_number,
+        inflow_min, fee_type, outflow_fee, outflow_fee_rate, outflow_min, outflow_max, outflow_automatic,
+        currency_digit, memo_regex, inflow_type, outflow_type, caution_number, status, create_time,
+        update_time
+        from currency_chain
+    </select>
+    <select id="selectByChain" resultMap="BaseResultMap">
+        select * from currency_chain
+        where id = #{chainId,jdbcType=BIGINT}
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.TransferOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.TransferOrderEntity">
+        <result column="currency" property="currency"/>
+        <result column="amount" property="amount"/>
+        <result column="new_price" property="newPrice"/>
+    </resultMap>
+
+    <select id="selectByUserIdAndType" resultMap="BaseResultMap">
+        SELECT currency, amount, new_price
+        FROM superex_trade.transfer_order
+        WHERE user_id = #{userId} AND status = 2 AND type IN (${typeIn}) AND update_time >= #{updateTime}
+    </select>
+
+</mapper>

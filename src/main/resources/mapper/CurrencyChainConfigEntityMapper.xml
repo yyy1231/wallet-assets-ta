@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.CurrencyChainConfigEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.CurrencyChainConfigEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="protocol" jdbcType="VARCHAR" property="protocol" />
+    <result column="imgs" jdbcType="VARCHAR" property="imgs" />
+    <result column="main_currency" jdbcType="VARCHAR" property="mainCurrency" />
+    <result column="wallet_service_ip" jdbcType="VARCHAR" property="walletServiceIp" />
+    <result column="wallet_service_port" jdbcType="VARCHAR" property="walletServicePort" />
+    <result column="wallet_service_name" jdbcType="VARCHAR" property="walletServiceName" />
+    <result column="wallet_service_password" jdbcType="VARCHAR" property="walletServicePassword" />
+    <result column="wallet_service_account" jdbcType="VARCHAR" property="walletServiceAccount" />
+    <result column="api_key" jdbcType="VARCHAR" property="apiKey" />
+    <result column="exec_collect_param" jdbcType="DECIMAL" property="execCollectParam" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="inflow_type" jdbcType="INTEGER" property="inflowType" />
+    <result column="outflow_type" jdbcType="INTEGER" property="outflowType" />
+    <result column="chain_id" jdbcType="BIGINT" property="chainId" />
+    <result column="auth_status" jdbcType="TINYINT" property="authStatus" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="contract_address_url" jdbcType="VARCHAR" property="contractAddressUrl" />
+    <result column="address_url" jdbcType="VARCHAR" property="addressUrl" />
+    <result column="transaction_url" jdbcType="VARCHAR" property="transactionUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from currency_chain_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.CurrencyChainConfigEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into currency_chain_config (protocol, imgs, main_currency,
+      wallet_service_ip, wallet_service_port, wallet_service_name,
+      wallet_service_password, wallet_service_account,
+      api_key, exec_collect_param, status,
+      inflow_type, outflow_type, chain_id,
+      auth_status, sort, contract_address_url,
+      address_url, transaction_url, create_time,
+      update_time)
+    values (#{protocol,jdbcType=VARCHAR}, #{imgs,jdbcType=VARCHAR}, #{mainCurrency,jdbcType=VARCHAR},
+      #{walletServiceIp,jdbcType=VARCHAR}, #{walletServicePort,jdbcType=VARCHAR}, #{walletServiceName,jdbcType=VARCHAR},
+      #{walletServicePassword,jdbcType=VARCHAR}, #{walletServiceAccount,jdbcType=VARCHAR},
+      #{apiKey,jdbcType=VARCHAR}, #{execCollectParam,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT},
+      #{inflowType,jdbcType=INTEGER}, #{outflowType,jdbcType=INTEGER}, #{chainId,jdbcType=BIGINT},
+      #{authStatus,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, #{contractAddressUrl,jdbcType=VARCHAR},
+      #{addressUrl,jdbcType=VARCHAR}, #{transactionUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.CurrencyChainConfigEntity">
+    update currency_chain_config
+    set protocol = #{protocol,jdbcType=VARCHAR},
+      imgs = #{imgs,jdbcType=VARCHAR},
+      main_currency = #{mainCurrency,jdbcType=VARCHAR},
+      wallet_service_ip = #{walletServiceIp,jdbcType=VARCHAR},
+      wallet_service_port = #{walletServicePort,jdbcType=VARCHAR},
+      wallet_service_name = #{walletServiceName,jdbcType=VARCHAR},
+      wallet_service_password = #{walletServicePassword,jdbcType=VARCHAR},
+      wallet_service_account = #{walletServiceAccount,jdbcType=VARCHAR},
+      api_key = #{apiKey,jdbcType=VARCHAR},
+      exec_collect_param = #{execCollectParam,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      inflow_type = #{inflowType,jdbcType=INTEGER},
+      outflow_type = #{outflowType,jdbcType=INTEGER},
+      chain_id = #{chainId,jdbcType=BIGINT},
+      auth_status = #{authStatus,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      contract_address_url = #{contractAddressUrl,jdbcType=VARCHAR},
+      address_url = #{addressUrl,jdbcType=VARCHAR},
+      transaction_url = #{transactionUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, protocol, imgs, main_currency, wallet_service_ip, wallet_service_port,
+    wallet_service_name, wallet_service_password, wallet_service_account, api_key, exec_collect_param,
+    status, inflow_type, outflow_type, chain_id, auth_status, sort, contract_address_url,
+    address_url, transaction_url, create_time, update_time
+    from currency_chain_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, protocol, imgs, main_currency, wallet_service_ip, wallet_service_port,
+    wallet_service_name, wallet_service_password, wallet_service_account, api_key, exec_collect_param,
+    status, inflow_type, outflow_type, chain_id, auth_status, sort, contract_address_url,
+    address_url, transaction_url, create_time, update_time
+    from currency_chain_config
+  </select>
+</mapper>

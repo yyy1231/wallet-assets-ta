@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.MultiCurrencySwapPositionMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.MultiCurrencySwapPositionEntity">
+        <result column="user_id" property="userId"/>
+        <result column="currency" property="currency"/>
+        <result column="symbol" property="symbol"/>
+        <result column="cost_open" property="costOpen"/>
+        <result column="direction" property="direction"/>
+        <result column="volume" property="volume"/>
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT user_id, currency, symbol, cost_open, direction, volume
+        FROM superex_multi_currency.multi_currency_swap_position
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

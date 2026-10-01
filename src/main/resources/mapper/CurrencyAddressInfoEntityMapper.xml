@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.CurrencyAddressInfoEntityMapper">
+  <resultMap id="BaseResultMap" type="com.novax.entity.mysql.CurrencyAddressInfoEntity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="protocol" jdbcType="VARCHAR" property="protocol" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="private_key" jdbcType="VARCHAR" property="privateKey" />
+    <result column="public_key" jdbcType="VARCHAR" property="publicKey" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="tenant_id" jdbcType="BIGINT" property="tenantId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from currency_address_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.novax.entity.mysql.CurrencyAddressInfoEntity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into currency_address_info (protocol, address, private_key,
+      public_key, status, create_time,
+      update_time, tenant_id)
+    values (#{protocol,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{privateKey,jdbcType=VARCHAR},
+      #{publicKey,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{tenantId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.novax.entity.mysql.CurrencyAddressInfoEntity">
+    update currency_address_info
+    set protocol = #{protocol,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      private_key = #{privateKey,jdbcType=VARCHAR},
+      public_key = #{publicKey,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      tenant_id = #{tenantId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, protocol, address, private_key, public_key, status, create_time, update_time,
+    tenant_id
+    from currency_address_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, protocol, address, private_key, public_key, status, create_time, update_time,
+    tenant_id
+    from currency_address_info
+  </select>
+</mapper>

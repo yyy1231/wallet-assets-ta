@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.novax.mapper.MultiCurrencySwapUserAssetsMapper">
+
+    <resultMap id="BaseResultMap" type="com.novax.entity.mysql.MultiCurrencySwapUserAssetsEntity">
+        <result column="user_id" property="userId"/>
+        <result column="currency" property="currency"/>
+        <result column="available" property="available"/>
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT user_id, currency, available
+        FROM superex_multi_currency.multi_currency_swap_user_assets
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>
